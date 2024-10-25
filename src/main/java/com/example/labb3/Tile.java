@@ -13,11 +13,11 @@ public class Tile {
 
     public Tile(){
         pane = new StackPane();
-        pane.setMinSize(50,50);
+        pane.setMinSize(100,100);
 
         Rectangle border = new Rectangle();
-        border.setWidth(50);
-        border.setHeight(50);
+        border.setWidth(100);
+        border.setHeight(100);
         border.setFill(Color.AQUA);
         border.setStroke(Color.BLACK);
         pane.getChildren().add(border);

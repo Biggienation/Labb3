@@ -10,8 +10,6 @@ public class GameBoard {
     public GameBoard() {
         pane = new StackPane();
         pane.setMinSize(100,100);
-        pane.setTranslateX(700/2);
-        pane.setTranslateY(500/2);
 
         addAllTiles();
     }
@@ -20,8 +18,8 @@ public class GameBoard {
         for (int row = 0; row < tiles.length; row++) {
             for (int col = 0; col < tiles[row].length; col++) {
                 Tile tile = new Tile();
-                tile.getStackPane().setTranslateX((col*50)- 50);
-                tile.getStackPane().setTranslateY((row*50)- 50);
+                tile.getStackPane().setTranslateX((col*100)-100);
+                tile.getStackPane().setTranslateY((row*100)- 100);
                 pane.getChildren().add(tile.getStackPane());
                 tiles[row][col] = tile;
             }
