@@ -1,4 +1,4 @@
-package com.example.labb3;
+package com.example.labb3.GameBoard;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -10,6 +10,7 @@ import javafx.scene.text.Font;
 public class Tile {
     private StackPane pane;
     private Label label;
+
 
     public Tile(){
         pane = new StackPane();
@@ -26,17 +27,13 @@ public class Tile {
         label.setAlignment(Pos.CENTER);
         label.setFont(Font.font(24));
         pane.getChildren().add(label);
-
-        pane.setOnMouseClicked(e ->{
-            System.out.println("clicked on");
-        });
     }
 
     public StackPane getStackPane(){
         return pane;
     }
 
-    public String getText(){
+    public String getLabel(){
         return label.getText();
     }
 
