@@ -25,7 +25,7 @@ public class Tile {
 
         label = new Label();
         label.setAlignment(Pos.CENTER);
-        label.setFont(Font.font(24));
+        label.setFont(Font.font(40));
         pane.getChildren().add(label);
     }
 
