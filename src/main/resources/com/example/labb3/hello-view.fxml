@@ -3,11 +3,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="500" prefWidth="700" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.labb3.HelloController">
-    <Label fx:id="playerX" text="X - score: "/>
-    <Label fx:id="playerO" text="O - score: "/>
-    <HBox fx:id="borderPane" prefWidth="700" prefHeight="320"/>
+<VBox prefHeight="500" prefWidth="700" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.labb3.HelloController">
+    <MenuBar>
+        <Menu text="Difficulty">
+            <MenuItem fx:id="easyBot" onAction="#ChangeToEasyBot" text="Eazy" />
+            <MenuItem onAction="#changeToPlayer" text="Player" />
+        </Menu>
+    </MenuBar>
+    <Label fx:id="playerXScore" style="-fx-border-color: GRAY;" />
+    <Label fx:id="playerOScore" />
+    <HBox fx:id="borderPane" prefHeight="320" prefWidth="700" />
     <HBox alignment="CENTER">
-        <Button fx:id="restart_button" onMouseClicked="#restartGame" text="Restart Game" visible="true" />
+        <Button fx:id="restart_button" alignment="BOTTOM_CENTER" onMouseClicked="#pressOnRestartGame" text="Restart Game" />
+        <Button fx:id="start_game" alignment="TOP_RIGHT" onMouseClicked="#pressOnNext" text="Next" />
+
     </HBox>
 </VBox>

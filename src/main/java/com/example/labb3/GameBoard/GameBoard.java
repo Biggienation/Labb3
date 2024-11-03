@@ -1,15 +1,23 @@
 package com.example.labb3.GameBoard;
 
+import com.example.labb3.Bot.Bot;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.layout.GridPane;
 
 import static com.example.labb3.GameBoard.GameState.FINISHED;
 import static com.example.labb3.GameBoard.GameState.STARTED;
 
 public class GameBoard {
+    private StringProperty playerXScore = new SimpleStringProperty();
+    private StringProperty playerOScore = new SimpleStringProperty();
+    private int playerX = 1;
+    private int playerO = 1;
     private GridPane grid;
     private Tile[][] tiles;
     GameState gameState = STARTED;
     public String turn = "X";
+    Bot bot;
 
     public GameBoard() {
         tiles = new Tile[3][3];
@@ -38,18 +46,33 @@ public class GameBoard {
                             CheckWinCondition(tiles);
                         }
                     });
-
     }
 
     private void CheckWinCondition(Tile[][] tiles) {
-        CheckWinConditionRow(tiles);
-        CheckWinConditionColum(tiles);
-        CheckWinConditionRightLeft(tiles);
-        CheckWinConditionLeftRight(tiles);
+        checkWinConditionRow(tiles);
+        checkWinConditionColum(tiles);
+        checkWinConditionRightLeft(tiles);
+        checkWinConditionLeftRight(tiles);
+        checkForEven(tiles);
+        //TODO Better check than Null
+        if (bot != null) {
+            //TODO delay the time for it to make a move
+            botNextMove(tiles);
+        } else {
+            changeTurn();
+        }
+    }
+
+    private void botNextMove(Tile[][] tiles) {
+        changeTurn("X");
+        bot.nextMove(tiles);
+    }
+
+    private void checkForEven(Tile[][] tiles) {
 
     }
 
-    private void CheckWinConditionLeftRight(Tile[][] tiles) {
+    private void checkWinConditionLeftRight(Tile[][] tiles) {
         if (!(tiles[0][0].getLabel().isEmpty())
                 && tiles[0][0].getLabel().equals(tiles[1][1].getLabel())
                 && tiles[0][0].getLabel().equals(tiles[2][2].getLabel()))
@@ -57,7 +80,7 @@ public class GameBoard {
 
     }
 
-    private void CheckWinConditionRightLeft(Tile[][] tiles) {
+    private void checkWinConditionRightLeft(Tile[][] tiles) {
         if (!(tiles[0][2].getLabel().isEmpty())
                 && tiles[0][2].getLabel().equals(tiles[1][1].getLabel())
                 && tiles[0][2].getLabel().equals(tiles[2][0].getLabel()))
@@ -65,7 +88,7 @@ public class GameBoard {
 
     }
 
-    private void CheckWinConditionColum(Tile[][] tiles) {
+    private void checkWinConditionColum(Tile[][] tiles) {
         for (int colum = 0; colum < tiles.length -1; colum++)
             if (!(tiles[0][colum].getLabel().isEmpty())
                     && tiles[0][colum].getLabel().equals(tiles[1][colum].getLabel())
@@ -76,7 +99,7 @@ public class GameBoard {
 
     }
 
-    private void CheckWinConditionRow(Tile[][] tiles) {
+    private void checkWinConditionRow(Tile[][] tiles) {
         for (int row = 0; row < tiles.length -1; row++)
             if (!(tiles[row][0].getLabel().isEmpty())
                     && tiles[row][0].getLabel().equals(tiles[row][1].getLabel())
@@ -88,15 +111,17 @@ public class GameBoard {
 
     private void WinTheGame(String turn) {
         gameState = FINISHED;
-        System.out.println("Win");
+        if (turn.equals("X")) {
+            setPlayerXScore("X - score: " + playerX++);
+        } else {
+            setPlayerOScore("O - score: " + playerO++);
+        }
 
     }
-
 
     private void CheckTile(Tile tile) {
         if (tile.getLabel().isEmpty()) {
             tile.setLabel(turn);
-            changeTurn();
         }
     }
 
@@ -107,6 +132,7 @@ public class GameBoard {
             this.turn = "X";
         }
     }
+
     public void changeTurn(String turn) {
         this.turn = turn;
     }
@@ -124,4 +150,23 @@ public class GameBoard {
         return grid;
     }
 
+    public StringProperty playerXScoreProperty() {
+        return playerXScore;
+    }
+
+    public void setPlayerXScore(String playerXScore) {
+        this.playerXScore.set(playerXScore);
+    }
+
+    public StringProperty playerOScoreProperty() {
+        return playerOScore;
+    }
+
+    public void setPlayerOScore(String playerOScore) {
+        this.playerOScore.set(playerOScore);
+    }
+
+    public void setBot(Bot bot) {
+        this.bot = bot;
+    }
 }
