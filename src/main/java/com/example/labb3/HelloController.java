@@ -21,7 +21,7 @@ public class HelloController {
     public Label playerXScore;
     public Label playerOScore;
     public Button restart_button;
-    private GameBoard gameBoard = new GameBoard();
+    private final GameBoard gameBoard = new GameBoard();
 
     public void initialize() {
         makeTileBoard(borderPane);
@@ -29,8 +29,8 @@ public class HelloController {
     }
 
     private void makePlayerScore() {
-        playerXScore.textProperty().bind(gameBoard.playerXScoreProperty());
-        playerOScore.textProperty().bind(gameBoard.playerOScoreProperty());
+        playerXScore.textProperty().bind(gameBoard.getScoreDisplay().playerXScoreProperty());
+        playerOScore.textProperty().bind(gameBoard.getScoreDisplay().playerOScoreProperty());
         playerXScore.setFont(Font.font(20));
         playerOScore.setFont(Font.font(20));
     }

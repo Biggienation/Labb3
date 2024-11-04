@@ -1,28 +1,22 @@
 package com.example.labb3.GameBoard;
 
 import com.example.labb3.Bot.Bot;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import com.example.labb3.ScoreDisplay.ScoreDisplay;
 import javafx.scene.layout.GridPane;
-
-import static com.example.labb3.GameBoard.GameState.FINISHED;
-import static com.example.labb3.GameBoard.GameState.STARTED;
+import static com.example.labb3.GameBoard.GameState.*;
 
 public class GameBoard {
-    private StringProperty playerXScore = new SimpleStringProperty();
-    private StringProperty playerOScore = new SimpleStringProperty();
-    private int playerX = 1;
-    private int playerO = 1;
     private GridPane grid;
     private Tile[][] tiles;
     GameState gameState = STARTED;
-    public String turn = "X";
     Bot bot;
+    ScoreDisplay scoreDisplay;
 
     public GameBoard() {
         tiles = new Tile[3][3];
         grid = new GridPane();
         grid.setMinSize(100, 100);
+        scoreDisplay = new ScoreDisplay();
         AddAllTiles();
     }
 
@@ -42,7 +36,7 @@ public class GameBoard {
             tile.getStackPane().
                     setOnMouseClicked(mouseEvent -> {
                         if(gameState == STARTED) {
-                            CheckTile(tile);
+                            checkTile(tile);
                             CheckWinCondition(tiles);
                         }
                     });
@@ -57,14 +51,15 @@ public class GameBoard {
         //TODO Better check than Null
         if (bot != null) {
             //TODO delay the time for it to make a move
+            //TODO If bot winns add score
             botNextMove(tiles);
         } else {
-            changeTurn();
+            scoreDisplay.changeTurn();
         }
     }
 
     private void botNextMove(Tile[][] tiles) {
-        changeTurn("X");
+        scoreDisplay.setPlayerTurn("X");
         bot.nextMove(tiles);
     }
 
@@ -76,7 +71,7 @@ public class GameBoard {
         if (!(tiles[0][0].getLabel().isEmpty())
                 && tiles[0][0].getLabel().equals(tiles[1][1].getLabel())
                 && tiles[0][0].getLabel().equals(tiles[2][2].getLabel()))
-            WinTheGame(turn);
+            winTheGame();
 
     }
 
@@ -84,7 +79,7 @@ public class GameBoard {
         if (!(tiles[0][2].getLabel().isEmpty())
                 && tiles[0][2].getLabel().equals(tiles[1][1].getLabel())
                 && tiles[0][2].getLabel().equals(tiles[2][0].getLabel()))
-                    WinTheGame(turn);
+                    winTheGame();
 
     }
 
@@ -93,7 +88,7 @@ public class GameBoard {
             if (!(tiles[0][colum].getLabel().isEmpty())
                     && tiles[0][colum].getLabel().equals(tiles[1][colum].getLabel())
                     && tiles[0][colum].getLabel().equals(tiles[2][colum].getLabel())){
-                WinTheGame(turn);
+                winTheGame();
                 return;
             }
 
@@ -104,42 +99,25 @@ public class GameBoard {
             if (!(tiles[row][0].getLabel().isEmpty())
                     && tiles[row][0].getLabel().equals(tiles[row][1].getLabel())
                     && tiles[row][0].getLabel().equals(tiles[row][2].getLabel())){
-                        WinTheGame(turn);
+                        winTheGame();
                         return;
             }
     }
 
-    private void WinTheGame(String turn) {
+    private void winTheGame() {
         gameState = FINISHED;
-        if (turn.equals("X")) {
-            setPlayerXScore("X - score: " + playerX++);
-        } else {
-            setPlayerOScore("O - score: " + playerO++);
-        }
-
+        scoreDisplay.addScore();
     }
 
-    private void CheckTile(Tile tile) {
+    private void checkTile(Tile tile) {
         if (tile.getLabel().isEmpty()) {
-            tile.setLabel(turn);
+            tile.setLabel(scoreDisplay.getPlayerTurn());
         }
-    }
-
-    public void changeTurn() {
-        if (turn.equals("X")) {
-            this.turn = "O";
-        } else {
-            this.turn = "X";
-        }
-    }
-
-    public void changeTurn(String turn) {
-        this.turn = turn;
     }
 
     public void startGame() {
         gameState = STARTED;
-        changeTurn("X");
+        scoreDisplay.setPlayerTurn("X");
     }
 
     public Tile[][] getTiles() {
@@ -150,20 +128,8 @@ public class GameBoard {
         return grid;
     }
 
-    public StringProperty playerXScoreProperty() {
-        return playerXScore;
-    }
-
-    public void setPlayerXScore(String playerXScore) {
-        this.playerXScore.set(playerXScore);
-    }
-
-    public StringProperty playerOScoreProperty() {
-        return playerOScore;
-    }
-
-    public void setPlayerOScore(String playerOScore) {
-        this.playerOScore.set(playerOScore);
+    public ScoreDisplay getScoreDisplay() {
+        return scoreDisplay;
     }
 
     public void setBot(Bot bot) {
