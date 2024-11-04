@@ -45,8 +45,8 @@ public class HelloController {
     }
 
     public void pressOnRestartGame(MouseEvent mouseEvent) {
-        pressOnNext(mouseEvent);
-        //TODO Reset playerscore
+        resetBoard();
+        gameBoard.resetScore();
     }
 
     public void pressOnNext(MouseEvent mouseEvent) {
@@ -54,15 +54,15 @@ public class HelloController {
     }
 
     private void resetBoard() {
-        Arrays.stream(gameBoard.getTiles()).forEach(tiles -> Arrays.stream(tiles).forEach(tile -> tile.setLabel("")));
+        Arrays.stream(gameBoard.getTiles())
+                .forEach(tiles -> Arrays.stream(tiles)
+                        .forEach(tile -> tile.setLabel("")));
         gameBoard.startGame();
     }
 
     public void ChangeToEasyBot(ActionEvent actionEvent) {
         resetBoard();
-        //TODO Reset playerscore
         gameBoard.setBot(new EasyBot());
-
     }
 
     public void changeToPlayer(ActionEvent actionEvent) {

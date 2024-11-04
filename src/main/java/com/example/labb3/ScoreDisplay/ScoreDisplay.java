@@ -6,9 +6,20 @@ import javafx.beans.property.StringProperty;
 public class ScoreDisplay {
     private final StringProperty playerXScore = new SimpleStringProperty();
     private final StringProperty playerOScore = new SimpleStringProperty();
-    private int playerX = 1;
-    private int playerO = 1;
+    private int playerX;
+    private int playerO;
     public String playerTurn = "X";
+
+    public ScoreDisplay(){
+        newScoreDisplay();
+    }
+
+    public void newScoreDisplay() {
+        playerX = 0;
+        playerO = 0;
+        setPlayerXScore("X - score: " + playerX++);
+        setPlayerOScore("O - score: " + playerO++);
+    }
 
     public String getPlayerTurn (){
         return playerTurn;
@@ -24,10 +35,6 @@ public class ScoreDisplay {
         } else {
             this.playerTurn = "X";
         }
-    }
-
-    public void changeTurn(String turn) {
-        this.playerTurn = turn;
     }
 
     public void addScore() {

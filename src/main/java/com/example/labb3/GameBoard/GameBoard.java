@@ -6,8 +6,8 @@ import javafx.scene.layout.GridPane;
 import static com.example.labb3.GameBoard.GameState.*;
 
 public class GameBoard {
-    private GridPane grid;
-    private Tile[][] tiles;
+    private final GridPane grid;
+    private final Tile[][] tiles;
     GameState gameState = STARTED;
     Bot bot;
     ScoreDisplay scoreDisplay;
@@ -51,7 +51,7 @@ public class GameBoard {
         //TODO Better check than Null
         if (bot != null) {
             //TODO delay the time for it to make a move
-            //TODO If bot winns add score
+            //TODO If bot wins add score
             botNextMove(tiles);
         } else {
             scoreDisplay.changeTurn();
@@ -134,5 +134,9 @@ public class GameBoard {
 
     public void setBot(Bot bot) {
         this.bot = bot;
+    }
+
+    public void resetScore() {
+        scoreDisplay.newScoreDisplay();
     }
 }
