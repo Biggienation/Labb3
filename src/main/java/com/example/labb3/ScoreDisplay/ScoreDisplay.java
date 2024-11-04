@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class ScoreDisplay {
+    private final StringProperty announcer = new SimpleStringProperty();
     private final StringProperty playerXScore = new SimpleStringProperty();
     private final StringProperty playerOScore = new SimpleStringProperty();
     private int playerX;
@@ -19,6 +20,7 @@ public class ScoreDisplay {
         playerO = 0;
         setPlayerXScore("X - score: " + playerX++);
         setPlayerOScore("O - score: " + playerO++);
+        announcer.set(playerTurn);
     }
 
     public String getPlayerTurn (){
@@ -27,6 +29,7 @@ public class ScoreDisplay {
 
     public void setPlayerTurn(String playerTurn){
         this.playerTurn = playerTurn;
+        announcer.set(playerTurn);
     }
 
     public void changeTurn() {
@@ -35,6 +38,7 @@ public class ScoreDisplay {
         } else {
             this.playerTurn = "X";
         }
+        announcer.set(playerTurn);
     }
 
     public void addScore() {
@@ -62,4 +66,15 @@ public class ScoreDisplay {
         this.playerOScore.set(playerOScore);
     }
 
+    public StringProperty getAnnouncer() {
+        return announcer;
+    }
+
+    public void announceWinner() {
+        announcer.set(playerTurn + " Wins!");
+    }
+
+    public void announceDraw() {
+        announcer.set("It´s a draw!");
+    }
 }

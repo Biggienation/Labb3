@@ -3,6 +3,10 @@ package com.example.labb3.GameBoard;
 import com.example.labb3.Bot.Bot;
 import com.example.labb3.ScoreDisplay.ScoreDisplay;
 import javafx.scene.layout.GridPane;
+
+import java.util.Arrays;
+import java.util.Optional;
+
 import static com.example.labb3.GameBoard.GameState.*;
 
 public class GameBoard {
@@ -37,7 +41,6 @@ public class GameBoard {
                     setOnMouseClicked(mouseEvent -> {
                         if(gameState == STARTED) {
                             checkTile(tile);
-                            CheckWinCondition(tiles);
                         }
                     });
     }
@@ -48,6 +51,11 @@ public class GameBoard {
         checkWinConditionRightLeft(tiles);
         checkWinConditionLeftRight(tiles);
         checkForEven(tiles);
+        if (gameState == STARTED)
+            nextTurn(tiles);
+    }
+
+    private void nextTurn(Tile[][] tiles) {
         //TODO Better check than Null
         if (bot != null) {
             //TODO delay the time for it to make a move
@@ -64,15 +72,24 @@ public class GameBoard {
     }
 
     private void checkForEven(Tile[][] tiles) {
+        if(gameState == STARTED) {
+            for (int row = 0; row < 3; row++) {
+                for (int col = 0; col < 3; col++) {
+                    if (tiles[row][col].getLabel().isEmpty())
+                        return;
+                }
 
+            }
+            gameState = FINISHED;
+            scoreDisplay.announceDraw();
+        }
     }
 
     private void checkWinConditionLeftRight(Tile[][] tiles) {
-        if (!(tiles[0][0].getLabel().isEmpty())
-                && tiles[0][0].getLabel().equals(tiles[1][1].getLabel())
-                && tiles[0][0].getLabel().equals(tiles[2][2].getLabel()))
-            winTheGame();
-
+            if (!(tiles[0][0].getLabel().isEmpty())
+                    && tiles[0][0].getLabel().equals(tiles[1][1].getLabel())
+                    && tiles[0][0].getLabel().equals(tiles[2][2].getLabel()))
+                winTheGame();
     }
 
     private void checkWinConditionRightLeft(Tile[][] tiles) {
@@ -84,7 +101,7 @@ public class GameBoard {
     }
 
     private void checkWinConditionColum(Tile[][] tiles) {
-        for (int colum = 0; colum < tiles.length -1; colum++)
+        for (int colum = 0; colum < tiles.length; colum++)
             if (!(tiles[0][colum].getLabel().isEmpty())
                     && tiles[0][colum].getLabel().equals(tiles[1][colum].getLabel())
                     && tiles[0][colum].getLabel().equals(tiles[2][colum].getLabel())){
@@ -95,7 +112,7 @@ public class GameBoard {
     }
 
     private void checkWinConditionRow(Tile[][] tiles) {
-        for (int row = 0; row < tiles.length -1; row++)
+        for (int row = 0; row < tiles.length; row++)
             if (!(tiles[row][0].getLabel().isEmpty())
                     && tiles[row][0].getLabel().equals(tiles[row][1].getLabel())
                     && tiles[row][0].getLabel().equals(tiles[row][2].getLabel())){
@@ -106,12 +123,14 @@ public class GameBoard {
 
     private void winTheGame() {
         gameState = FINISHED;
+        scoreDisplay.announceWinner();
         scoreDisplay.addScore();
     }
 
     private void checkTile(Tile tile) {
         if (tile.getLabel().isEmpty()) {
             tile.setLabel(scoreDisplay.getPlayerTurn());
+            CheckWinCondition(tiles);
         }
     }
 

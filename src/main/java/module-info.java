@@ -8,4 +8,6 @@ module com.example.labb3 {
     exports com.example.labb3;
     exports com.example.labb3.GameBoard;
     opens com.example.labb3.GameBoard to javafx.fxml;
+    exports com.example.labb3.Controller;
+    opens com.example.labb3.Controller to javafx.fxml;
 }

@@ -1,4 +1,4 @@
-package com.example.labb3;
+package com.example.labb3.Controller;
 
 import com.example.labb3.Bot.EasyBot;
 import javafx.event.ActionEvent;
@@ -20,8 +20,10 @@ public class HelloController {
     public HBox borderPane = new HBox();
     public Label playerXScore;
     public Label playerOScore;
+    public Label announcer;
     public Button restart_button;
     private final GameBoard gameBoard = new GameBoard();
+
 
     public void initialize() {
         makeTileBoard(borderPane);
@@ -29,6 +31,8 @@ public class HelloController {
     }
 
     private void makePlayerScore() {
+        announcer.textProperty().bind(gameBoard.getScoreDisplay().getAnnouncer());
+        announcer.setFont(Font.font(40));
         playerXScore.textProperty().bind(gameBoard.getScoreDisplay().playerXScoreProperty());
         playerOScore.textProperty().bind(gameBoard.getScoreDisplay().playerOScoreProperty());
         playerXScore.setFont(Font.font(20));

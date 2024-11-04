@@ -19,7 +19,7 @@ public class Tile {
         Rectangle border = new Rectangle();
         border.setWidth(100);
         border.setHeight(100);
-        border.setFill(Color.AQUA);
+        border.setFill(Color.web("#14BDAC"));
         border.setStroke(Color.BLACK);
         pane.getChildren().add(border);
 
