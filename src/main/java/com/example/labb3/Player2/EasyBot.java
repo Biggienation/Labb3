@@ -5,13 +5,9 @@ import com.example.labb3.GameBoard.Tile;
 import java.util.Random;
 
 public class EasyBot implements Player2 {
-    String marker = "T";
+    String marker = "O";
     Random random = new Random();
     int row, colum;
-
-    public EasyBot() {
-        super();
-    }
 
     @Override
     public boolean isNotHuman (){
@@ -37,7 +33,6 @@ public class EasyBot implements Player2 {
         return tiles[row][colum].getLabel().isEmpty();
 
     }
-
 
     private void whereTo() {
         row = random.nextInt(3);
