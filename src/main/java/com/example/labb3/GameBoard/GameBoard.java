@@ -46,7 +46,7 @@ public class GameBoard {
                     });
     }
 
-    private void checkTile(Tile tile) {
+    public void checkTile(Tile tile) {
         if (tile.getLabel().isEmpty()) {
 
             if (turn == 2)
@@ -73,7 +73,7 @@ public class GameBoard {
     }
 
 
-    private void checkWinCondition(Tile[][] tiles) {
+    public void checkWinCondition(Tile[][] tiles) {
         checkWinConditionRow(tiles);
         checkWinConditionColum(tiles);
         checkWinConditionRightLeft(tiles);
@@ -165,5 +165,17 @@ public class GameBoard {
 
     public ScoreDisplay getScoreDisplay() {
         return scoreDisplay;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public void setTurn(int Turn){
+        this.turn = turn;
+    }
+
+    public String getPlayer1Marker(){
+        return player1Marker;
     }
 }
