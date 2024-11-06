@@ -15,7 +15,7 @@
         <Label fx:id="playerXScore" />
         <Label fx:id="playerOScore" />
     </VBox>
-    <HBox fx:id="borderPane" prefHeight="320" prefWidth="700" style="-fx-background-color: #14BDAC;" />
+    <HBox fx:id="borderPane" prefHeight="300" prefWidth="700" style="-fx-background-color: #14BDAC;" />
     <HBox alignment="CENTER">
         <Button fx:id="restart_button" alignment="BOTTOM_CENTER" onMouseClicked="#pressOnRestartGame" text="Restart Game" />
         <Button fx:id="start_game" alignment="TOP_RIGHT" onMouseClicked="#pressOnNext" text="Next" />

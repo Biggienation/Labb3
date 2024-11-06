@@ -1,6 +1,7 @@
 package com.example.labb3.Controller;
 
 import com.example.labb3.Bot.EasyBot;
+import com.example.labb3.Bot.HumanPlayer2;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -33,8 +34,8 @@ public class HelloController {
     private void makePlayerScore() {
         announcer.textProperty().bind(gameBoard.getScoreDisplay().getAnnouncer());
         announcer.setFont(Font.font(40));
-        playerXScore.textProperty().bind(gameBoard.getScoreDisplay().playerXScoreProperty());
-        playerOScore.textProperty().bind(gameBoard.getScoreDisplay().playerOScoreProperty());
+        playerXScore.textProperty().bind(gameBoard.getScoreDisplay().player1ScoreProperty());
+        playerOScore.textProperty().bind(gameBoard.getScoreDisplay().player2ScoreProperty());
         playerXScore.setFont(Font.font(20));
         playerOScore.setFont(Font.font(20));
     }
@@ -66,11 +67,11 @@ public class HelloController {
 
     public void ChangeToEasyBot(ActionEvent actionEvent) {
         resetBoard();
-        gameBoard.setBot(new EasyBot());
+        gameBoard.setPlayer2(new EasyBot());
     }
 
     public void changeToPlayer(ActionEvent actionEvent) {
         resetBoard();
-        gameBoard.setBot(null);
+        gameBoard.setPlayer2(new HumanPlayer2());
     }
 }

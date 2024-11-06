@@ -5,10 +5,10 @@ import javafx.beans.property.StringProperty;
 
 public class ScoreDisplay {
     private final StringProperty announcer = new SimpleStringProperty();
-    private final StringProperty playerXScore = new SimpleStringProperty();
-    private final StringProperty playerOScore = new SimpleStringProperty();
-    private int playerX;
-    private int playerO;
+    private final StringProperty player1Score = new SimpleStringProperty();
+    private final StringProperty player2Score = new SimpleStringProperty();
+    private int player1;
+    private int player2;
     public String playerTurn = "X";
 
     public ScoreDisplay(){
@@ -16,10 +16,10 @@ public class ScoreDisplay {
     }
 
     public void newScoreDisplay() {
-        playerX = 0;
-        playerO = 0;
-        setPlayerXScore("X - score: " + playerX++);
-        setPlayerOScore("O - score: " + playerO++);
+        player1 = 0;
+        player2 = 0;
+        setPlayer1Score("X - score: " + player1++);
+        setPlayer2Score("O - score: " + player2++);
         announcer.set(playerTurn);
     }
 
@@ -32,46 +32,37 @@ public class ScoreDisplay {
         announcer.set(playerTurn);
     }
 
-    public void changeTurn() {
-        if (playerTurn.equals("X")) {
-            this.playerTurn = "O";
+    public void addScore(int turn) {
+        if (turn == 1) {
+            setPlayer1Score("X - score: " + player1++);
         } else {
-            this.playerTurn = "X";
-        }
-        announcer.set(playerTurn);
-    }
-
-    public void addScore() {
-        if (playerTurn.equals("X")) {
-            setPlayerXScore("X - score: " + playerX++);
-        } else {
-            setPlayerOScore("O - score: " + playerO++);
+            setPlayer2Score("O - score: " + player2++);
         }
 
     }
 
-    public StringProperty playerXScoreProperty() {
-        return playerXScore;
+    public StringProperty player1ScoreProperty() {
+        return player1Score;
     }
 
-    public void setPlayerXScore(String playerXScore) {
-        this.playerXScore.set(playerXScore);
+    public void setPlayer1Score(String player1Score) {
+        this.player1Score.set(player1Score);
     }
 
-    public StringProperty playerOScoreProperty() {
-        return playerOScore;
+    public StringProperty player2ScoreProperty() {
+        return player2Score;
     }
 
-    public void setPlayerOScore(String playerOScore) {
-        this.playerOScore.set(playerOScore);
+    public void setPlayer2Score(String player2Score) {
+        this.player2Score.set(player2Score);
     }
 
     public StringProperty getAnnouncer() {
         return announcer;
     }
 
-    public void announceWinner() {
-        announcer.set(playerTurn + " Wins!");
+    public void announceWinner(String playerMarker) {
+        announcer.set(playerMarker + " Wins!");
     }
 
     public void announceDraw() {

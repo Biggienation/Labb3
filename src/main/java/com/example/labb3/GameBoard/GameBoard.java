@@ -1,26 +1,27 @@
 package com.example.labb3.GameBoard;
 
-import com.example.labb3.Bot.Bot;
+import com.example.labb3.Bot.HumanPlayer2;
+import com.example.labb3.Bot.Player2;
 import com.example.labb3.ScoreDisplay.ScoreDisplay;
 import javafx.scene.layout.GridPane;
-
-import java.util.Arrays;
-import java.util.Optional;
 
 import static com.example.labb3.GameBoard.GameState.*;
 
 public class GameBoard {
     private final GridPane grid;
     private final Tile[][] tiles;
-    GameState gameState = STARTED;
-    Bot bot;
+    int turn = 1;
+    String player1Marker = "X";
+    Player2 player2;
     ScoreDisplay scoreDisplay;
+    GameState gameState = STARTED;
 
     public GameBoard() {
         tiles = new Tile[3][3];
         grid = new GridPane();
         grid.setMinSize(100, 100);
         scoreDisplay = new ScoreDisplay();
+        player2 = new HumanPlayer2();
         AddAllTiles();
     }
 
@@ -45,7 +46,32 @@ public class GameBoard {
                     });
     }
 
-    private void CheckWinCondition(Tile[][] tiles) {
+    private void checkTile(Tile tile) {
+        if (tile.getLabel().isEmpty()) {
+
+            if (turn == 2)
+                tile.setLabel(player2.getMarker());
+            else
+                tile.setLabel(player1Marker);
+
+            checkWinCondition(tiles);
+        }
+    }
+
+    private void nextTurn(Tile[][] tiles) {
+        if (player2.isNotHuman() && turn == 1) {
+            player2.nextMove(tiles);
+            turn = 2;
+            checkWinCondition(tiles);
+        } else if (turn == 2) {
+            turn = 1;
+        } else {
+            turn = 2;
+        }
+    }
+
+
+    private void checkWinCondition(Tile[][] tiles) {
         checkWinConditionRow(tiles);
         checkWinConditionColum(tiles);
         checkWinConditionRightLeft(tiles);
@@ -53,22 +79,6 @@ public class GameBoard {
         checkForEven(tiles);
         if (gameState == STARTED)
             nextTurn(tiles);
-    }
-
-    private void nextTurn(Tile[][] tiles) {
-        //TODO Better check than Null
-        if (bot != null) {
-            //TODO delay the time for it to make a move
-            //TODO If bot wins add score
-            botNextMove(tiles);
-        } else {
-            scoreDisplay.changeTurn();
-        }
-    }
-
-    private void botNextMove(Tile[][] tiles) {
-        scoreDisplay.setPlayerTurn("X");
-        bot.nextMove(tiles);
     }
 
     private void checkForEven(Tile[][] tiles) {
@@ -123,20 +133,24 @@ public class GameBoard {
 
     private void winTheGame() {
         gameState = FINISHED;
-        scoreDisplay.announceWinner();
-        scoreDisplay.addScore();
-    }
-
-    private void checkTile(Tile tile) {
-        if (tile.getLabel().isEmpty()) {
-            tile.setLabel(scoreDisplay.getPlayerTurn());
-            CheckWinCondition(tiles);
-        }
+         if (turn == 1)
+             scoreDisplay.announceWinner(player1Marker);
+         else
+             scoreDisplay.announceWinner(player2.getMarker());
+        scoreDisplay.addScore(turn);
     }
 
     public void startGame() {
         gameState = STARTED;
-        scoreDisplay.setPlayerTurn("X");
+        turn = 1;
+    }
+
+    public void resetScore() {
+        scoreDisplay.newScoreDisplay();
+    }
+
+    public void setPlayer2(Player2 player2) {
+        this.player2 = player2;
     }
 
     public Tile[][] getTiles() {
@@ -149,13 +163,5 @@ public class GameBoard {
 
     public ScoreDisplay getScoreDisplay() {
         return scoreDisplay;
-    }
-
-    public void setBot(Bot bot) {
-        this.bot = bot;
-    }
-
-    public void resetScore() {
-        scoreDisplay.newScoreDisplay();
     }
 }
