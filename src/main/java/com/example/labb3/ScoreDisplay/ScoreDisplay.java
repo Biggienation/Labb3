@@ -9,36 +9,31 @@ public class ScoreDisplay {
     private final StringProperty player2Score = new SimpleStringProperty();
     private int player1;
     private int player2;
-    public String playerTurn = "X";
 
-    public ScoreDisplay(){
-        newScoreDisplay();
+
+    public ScoreDisplay(String player1Marker){
+        newScoreDisplay(player1Marker);
     }
 
-    public void newScoreDisplay() {
+    public void newScoreDisplay(String player1Marker) {
         player1 = 0;
         player2 = 0;
-        setPlayer1Score("X - score: " + player1++);
-        setPlayer2Score("O - score: " + player2++);
-        announcer.set(playerTurn);
-    }
-
-    public String getPlayerTurn (){
-        return playerTurn;
-    }
-
-    public void setPlayerTurn(String playerTurn){
-        this.playerTurn = playerTurn;
-        announcer.set(playerTurn);
+        setPlayer1Score("X - score: " + player1);
+        setPlayer2Score("O - score: " + player2);
+        announcer.set(player1Marker);
     }
 
     public void addScore(int turn) {
         if (turn == 1) {
-            setPlayer1Score("X - score: " + player1++);
+            setPlayer1Score("X - score: " + ++player1);
         } else {
-            setPlayer2Score("O - score: " + player2++);
+            setPlayer2Score("O - score: " + ++player2);
         }
 
+    }
+
+    public void setPlayerTurn (String playerMaker){
+        announcer.set(playerMaker);
     }
 
     public StringProperty player1ScoreProperty() {

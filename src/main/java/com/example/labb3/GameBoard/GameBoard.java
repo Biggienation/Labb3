@@ -20,7 +20,7 @@ public class GameBoard {
         tiles = new Tile[3][3];
         grid = new GridPane();
         grid.setMinSize(100, 100);
-        scoreDisplay = new ScoreDisplay();
+        scoreDisplay = new ScoreDisplay(player1Marker);
         player2 = new HumanPlayer2();
         AddAllTiles();
     }
@@ -65,8 +65,10 @@ public class GameBoard {
             checkWinCondition(tiles);
         } else if (turn == 2) {
             turn = 1;
+            scoreDisplay.setPlayerTurn(player1Marker);
         } else {
             turn = 2;
+            scoreDisplay.setPlayerTurn(player2.getMarker());
         }
     }
 
@@ -146,7 +148,7 @@ public class GameBoard {
     }
 
     public void resetScore() {
-        scoreDisplay.newScoreDisplay();
+        scoreDisplay.newScoreDisplay(player1Marker);
     }
 
     public void setPlayer2(Player2 player2) {
