@@ -1,7 +1,7 @@
 package com.example.labb3.Controller;
 
-import com.example.labb3.Bot.EasyBot;
-import com.example.labb3.Bot.HumanPlayer2;
+import com.example.labb3.Player2.EasyBot;
+import com.example.labb3.Player2.HumanPlayer2;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;

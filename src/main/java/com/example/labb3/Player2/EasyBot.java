@@ -1,10 +1,8 @@
-package com.example.labb3.Bot;
+package com.example.labb3.Player2;
 
 import com.example.labb3.GameBoard.Tile;
 
 import java.util.Random;
-
-import static com.example.labb3.GameBoard.GameState.STARTED;
 
 public class EasyBot implements Player2 {
     String marker = "T";

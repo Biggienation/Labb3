@@ -1,7 +1,7 @@
 package com.example.labb3.GameBoard;
 
-import com.example.labb3.Bot.HumanPlayer2;
-import com.example.labb3.Bot.Player2;
+import com.example.labb3.Player2.HumanPlayer2;
+import com.example.labb3.Player2.Player2;
 import com.example.labb3.ScoreDisplay.ScoreDisplay;
 import javafx.scene.layout.GridPane;
 
