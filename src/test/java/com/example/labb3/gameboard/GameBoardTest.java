@@ -1,14 +1,13 @@
 package com.example.labb3.gameboard;
 import com.example.labb3.GameBoard.GameBoard;
 import com.example.labb3.GameBoard.GameState;
-import com.example.labb3.GameBoard.Tile;
 import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameBoardTest {
     GameBoard gameBoard = new GameBoard();
+
     @Test
     void WhenCreatingGameBoardThenGameStateIsStared(){
         assertEquals(GameState.STARTED, gameBoard.getGameState(), "The GameState should be started");

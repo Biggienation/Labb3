@@ -171,7 +171,7 @@ public class GameBoard {
         return gameState;
     }
 
-    public void setTurn(int Turn){
+    public void setTurn(int turn){
         this.turn = turn;
     }
 
