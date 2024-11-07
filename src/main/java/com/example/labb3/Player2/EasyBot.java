@@ -1,6 +1,7 @@
 package com.example.labb3.Player2;
 
 import com.example.labb3.GameBoard.Tile;
+import javafx.beans.property.StringProperty;
 
 import java.util.Random;
 
@@ -15,7 +16,7 @@ public class EasyBot implements Player2 {
     }
 
     @Override
-    public void nextMove(Tile[][] tiles) {
+    public void nextMove(StringProperty[][] tiles) {
         whereTo();
         if (checkIfTileIsEmpty(tiles)){
             makeMove(tiles);
@@ -25,12 +26,12 @@ public class EasyBot implements Player2 {
 
     }
 
-    private void makeMove(Tile[][] tiles) {
-        tiles[row][colum].setLabel(marker);
+    private void makeMove(StringProperty[][] tiles) {
+        tiles[row][colum].set(marker);
     }
 
-    private boolean checkIfTileIsEmpty(Tile[][] tiles) {
-        return tiles[row][colum].getLabel().isEmpty();
+    private boolean checkIfTileIsEmpty(StringProperty[][] tiles) {
+        return tiles[row][colum].get().isEmpty();
 
     }
 

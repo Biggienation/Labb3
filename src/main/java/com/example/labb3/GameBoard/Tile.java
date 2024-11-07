@@ -23,7 +23,7 @@ public class Tile {
         border.setStroke(Color.BLACK);
         pane.getChildren().add(border);
 
-        label = new Label();
+        label = new Label("");
         label.setAlignment(Pos.CENTER);
         label.setFont(Font.font(40));
         pane.getChildren().add(label);
@@ -33,11 +33,15 @@ public class Tile {
         return pane;
     }
 
-    public String getLabel(){
+    public Label getLabel(){
+        return label;
+    }
+
+    public String getText(){
         return label.getText();
     }
 
-    public void setLabel(String text){
+    public void setText(String text){
         label.setText(text);
     }
 }

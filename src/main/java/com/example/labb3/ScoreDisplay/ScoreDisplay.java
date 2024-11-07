@@ -1,5 +1,6 @@
 package com.example.labb3.ScoreDisplay;
 
+import com.example.labb3.GameBoard.PlayerTurn;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -23,8 +24,8 @@ public class ScoreDisplay {
         announcer.set(player1Marker);
     }
 
-    public void addScore(int turn) {
-        if (turn == 1) {
+    public void addScore(PlayerTurn turn) {
+        if (turn == PlayerTurn.PLAYER1) {
             setPlayer1Score("X - score: " + ++player1);
         } else {
             setPlayer2Score("O - score: " + ++player2);

@@ -1,6 +1,7 @@
 package com.example.labb3.Player2;
 
 import com.example.labb3.GameBoard.Tile;
+import javafx.beans.property.StringProperty;
 
 public class HumanPlayer2 implements Player2{
     String marker = "O";
@@ -9,7 +10,7 @@ public class HumanPlayer2 implements Player2{
     }
 
     @Override
-    public void nextMove(Tile[][] tiles) {
+    public void nextMove(StringProperty[][] tiles) {
 
     }
 
