@@ -8,14 +8,13 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import com.example.labb3.GameBoard.*;
+import com.example.labb3.Model.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
-
 import java.util.Arrays;
 
-import static com.example.labb3.GameBoard.GameState.STARTED;
+import static com.example.labb3.Model.GameState.STARTED;
 
 
 public class HelloController {
@@ -51,15 +50,15 @@ public class HelloController {
     }
 
     private void AddAllTiles() {
-        for (int row = 0; row < model.getTiles().length; row++) {
-            for (int col = 0; col < model.getTiles()[row].length; col++) {
+        for (int row = 0; row < model.getBoardProperties().length; row++) {
+            for (int col = 0; col < model.getBoardProperties()[row].length; col++) {
                 Tile tile = new Tile();
 
                 SetOnMouseClick(tile);
                 grid.add(tile.getStackPane(), col, row);
                 StringProperty temp = new SimpleStringProperty();
                 tile.getLabel().textProperty().bindBidirectional(temp);
-                model.getTiles()[row][col] = temp;
+                model.getBoardProperties()[row][col] = temp;
             }
         }
     }
@@ -83,7 +82,7 @@ public class HelloController {
     }
 
     private void resetBoard() {
-        Arrays.stream(model.getTiles())
+        Arrays.stream(model.getBoardProperties())
                 .forEach(tiles -> Arrays.stream(tiles)
                         .forEach(tile -> tile.set("")));
         model.startGame();

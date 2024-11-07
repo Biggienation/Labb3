@@ -1,4 +1,4 @@
-package com.example.labb3.GameBoard;
+package com.example.labb3.Model;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

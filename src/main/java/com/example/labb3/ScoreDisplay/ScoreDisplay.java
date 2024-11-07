@@ -1,6 +1,6 @@
 package com.example.labb3.ScoreDisplay;
 
-import com.example.labb3.GameBoard.PlayerTurn;
+import com.example.labb3.Model.PlayerTurn;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
