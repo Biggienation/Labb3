@@ -4,12 +4,10 @@ import com.example.labb3.Player2.EasyBot;
 import com.example.labb3.Player2.HumanPlayer2;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import com.example.labb3.GameBoard.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -22,7 +20,6 @@ import static com.example.labb3.GameBoard.GameState.STARTED;
 
 public class HelloController {
     @FXML
-    public Button Start_button;
     public HBox borderPane = new HBox();
     public GridPane grid = new GridPane();
     public Label playerXScore;
@@ -69,23 +66,19 @@ public class HelloController {
 
     private void SetOnMouseClick(Tile tile) {
         tile.getStackPane().
-                setOnMouseClicked(mouseEvent -> {
+                setOnMouseClicked( _ -> {
                     if(model.getGameState() == STARTED) {
                         model.checkTile(tile.getLabel().textProperty());
                     }
                 });
     }
 
-    public Model getGameBoard() {
-        return model;
-    }
-
-    public void pressOnRestartGame(MouseEvent mouseEvent) {
+    public void pressOnRestartGame() {
         resetBoard();
         model.resetScore();
     }
 
-    public void pressOnNext(MouseEvent mouseEvent) {
+    public void pressOnNext() {
         resetBoard();
     }
 
@@ -96,12 +89,12 @@ public class HelloController {
         model.startGame();
     }
 
-    public void ChangeToEasyBot(ActionEvent actionEvent) {
+    public void ChangeToEasyBot() {
         resetBoard();
         model.setPlayer2(new EasyBot());
     }
 
-    public void changeToPlayer(ActionEvent actionEvent) {
+    public void changeToPlayer() {
         resetBoard();
         model.setPlayer2(new HumanPlayer2());
     }

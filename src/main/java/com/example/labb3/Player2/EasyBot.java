@@ -1,8 +1,6 @@
 package com.example.labb3.Player2;
 
-import com.example.labb3.GameBoard.Tile;
 import javafx.beans.property.StringProperty;
-
 import java.util.Random;
 
 public class EasyBot implements Player2 {

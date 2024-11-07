@@ -8,8 +8,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
 public class Tile {
-    private StackPane pane;
-    private Label label;
+    private final StackPane pane;
+    private final Label label;
 
 
     public Tile(){
@@ -35,13 +35,5 @@ public class Tile {
 
     public Label getLabel(){
         return label;
-    }
-
-    public String getText(){
-        return label.getText();
-    }
-
-    public void setText(String text){
-        label.setText(text);
     }
 }
