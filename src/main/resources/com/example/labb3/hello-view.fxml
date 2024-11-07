@@ -6,14 +6,14 @@
 <VBox prefHeight="500" prefWidth="700" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.labb3.Controller.HelloController">
     <MenuBar>
         <Menu text="Player 2">
-            <MenuItem fx:id="easyBot" onAction="#ChangeToEasyBot" text="Easy" />
-            <MenuItem onAction="#changeToPlayer" text="Local" />
+            <MenuItem fx:id="easyBot" onAction="#switchToEasyBot" text="Easy" />
+            <MenuItem onAction="#switchToHumanPlayer" text="Local" />
         </Menu>
 
     </MenuBar>
     <VBox alignment="CENTER">
         <Label fx:id="announcer" />
-        <Label fx:id="playerXScore" />
+        <Label fx:id="player1Score" />
         <Label fx:id="playerOScore" />
     </VBox>
     <HBox fx:id="borderPane" prefHeight="300" prefWidth="700" style="-fx-background-color: #14BDAC;" />

@@ -20,63 +20,80 @@ import static com.example.labb3.Model.GameState.STARTED;
 public class HelloController {
     @FXML
     public HBox borderPane = new HBox();
+    @FXML
     public GridPane grid = new GridPane();
-    public Label playerXScore;
-    public Label playerOScore;
+    @FXML
+    public Label player1Score;
+    @FXML
+    public Label player2Score;
+    @FXML
     public Label announcer;
+    @FXML
     public Button restart_button;
+
     private final Model model = new Model();
 
 
     public void initialize() {
-        makeTileBoard(borderPane);
-        makePlayerScore();
+        setUpUI();
+    }
+
+    private void setUpUI() {
+        setUpGameBoard();
+        setUpScoreBoard();
+
+    }
+
+    private void setUpGameBoard() {
         grid.setMinSize(100, 100);
-    }
-
-    private void makePlayerScore() {
-        announcer.textProperty().bind(model.getScoreDisplay().getAnnouncer());
-        announcer.setFont(Font.font(40));
-        playerXScore.textProperty().bind(model.getScoreDisplay().player1ScoreProperty());
-        playerOScore.textProperty().bind(model.getScoreDisplay().player2ScoreProperty());
-        playerXScore.setFont(Font.font(20));
-        playerOScore.setFont(Font.font(20));
-    }
-
-    private void makeTileBoard(HBox borderPane) {
-        AddAllTiles();
         borderPane.setAlignment(Pos.CENTER);
+        AddTilesToGrid();
         borderPane.getChildren().add(grid);
     }
 
-    private void AddAllTiles() {
-        for (int row = 0; row < model.getBoardProperties().length; row++) {
-            for (int col = 0; col < model.getBoardProperties()[row].length; col++) {
-                Tile tile = new Tile();
+    private void setUpScoreBoard() {
+        announcer.textProperty().bind(model.getScoreDisplay().getAnnouncer());
+        announcer.setFont(Font.font(40));
 
-                SetOnMouseClick(tile);
+        player1Score.textProperty().bind(model.getScoreDisplay().player1ScoreProperty());
+        player2Score.textProperty().bind(model.getScoreDisplay().player2ScoreProperty());
+        player1Score.setFont(Font.font(20));
+        player2Score.setFont(Font.font(20));
+    }
+
+
+    private void AddTilesToGrid() {
+        for (int row = 0; row < Model.BOARD_SIZE; row++) {
+            for (int col = 0; col < Model.BOARD_SIZE; col++) {
+                Tile tile = createTile(row, col);
                 grid.add(tile.getStackPane(), col, row);
-                StringProperty temp = new SimpleStringProperty();
-                tile.getLabel().textProperty().bindBidirectional(temp);
-                model.getBoardProperties()[row][col] = temp;
             }
         }
     }
 
-    private void SetOnMouseClick(Tile tile) {
-        tile.getStackPane().
-                setOnMouseClicked( _ -> {
-                    if(model.getGameState() == STARTED) {
-                        model.checkTile(tile.getLabel().textProperty());
-                    }
-                });
+    private Tile createTile(int row, int col) {
+        Tile tile = new Tile();
+        setUpTileOnMouseClicked(tile);
+        StringProperty tileProperty = new SimpleStringProperty();
+        tile.getLabel().textProperty().bindBidirectional(tileProperty);
+        model.getBoardProperties()[row][col] = tileProperty;
+        return tile;
     }
 
+    private void setUpTileOnMouseClicked(Tile tile) {
+        tile.getStackPane().setOnMouseClicked( _ -> {
+            if(model.getGameState() == STARTED) {
+                model.checkTile(tile.getLabel().textProperty());
+            }
+        });
+    }
+
+    @FXML
     public void pressOnRestartGame() {
         resetBoard();
         model.resetScore();
     }
-
+    @FXML
     public void pressOnNext() {
         resetBoard();
     }
@@ -88,12 +105,14 @@ public class HelloController {
         model.startGame();
     }
 
-    public void ChangeToEasyBot() {
+    @FXML
+    public void switchToEasyBot() {
         resetBoard();
         model.setPlayer2(new EasyBot());
     }
 
-    public void changeToPlayer() {
+    @FXML
+    public void switchToHumanPlayer() {
         resetBoard();
         model.setPlayer2(new HumanPlayer2());
     }

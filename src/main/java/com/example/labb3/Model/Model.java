@@ -8,7 +8,7 @@ import static com.example.labb3.Model.GameState.*;
 import static com.example.labb3.Model.PlayerTurn.*;
 
 public class Model {
-    private static final int BOARD_SIZE = 3;
+    public static final int BOARD_SIZE = 3;
     private final StringProperty[][] boardProperties;
     private PlayerTurn turn = PLAYER1;
     private String player1Marker = "X";
