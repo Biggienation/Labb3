@@ -52,11 +52,11 @@ public class HelloController {
     }
 
     private void setUpScoreBoard() {
-        announcer.textProperty().bind(model.getScoreDisplay().getAnnouncer());
+        announcer.textProperty().bind(model.getScoreBoard().getAnnouncer());
         announcer.setFont(Font.font(40));
 
-        player1Score.textProperty().bind(model.getScoreDisplay().player1ScoreProperty());
-        player2Score.textProperty().bind(model.getScoreDisplay().player2ScoreProperty());
+        player1Score.textProperty().bind(model.getScoreBoard().player1ScoreProperty());
+        player2Score.textProperty().bind(model.getScoreBoard().player2ScoreProperty());
         player1Score.setFont(Font.font(20));
         player2Score.setFont(Font.font(20));
     }

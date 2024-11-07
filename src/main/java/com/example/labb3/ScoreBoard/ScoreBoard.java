@@ -1,10 +1,10 @@
-package com.example.labb3.ScoreDisplay;
+package com.example.labb3.ScoreBoard;
 
 import com.example.labb3.Model.PlayerTurn;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class ScoreDisplay {
+public class ScoreBoard {
     private final StringProperty announcer = new SimpleStringProperty();
     private final StringProperty player1Score = new SimpleStringProperty();
     private final StringProperty player2Score = new SimpleStringProperty();
@@ -12,7 +12,7 @@ public class ScoreDisplay {
     private int player2;
 
 
-    public ScoreDisplay(String player1Marker){
+    public ScoreBoard(String player1Marker){
         newScoreDisplay(player1Marker);
     }
 

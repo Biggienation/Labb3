@@ -2,7 +2,7 @@ package com.example.labb3.Model;
 
 import com.example.labb3.Player2.HumanPlayer2;
 import com.example.labb3.Player2.Player2;
-import com.example.labb3.ScoreDisplay.ScoreDisplay;
+import com.example.labb3.ScoreBoard.ScoreBoard;
 import javafx.beans.property.StringProperty;
 import static com.example.labb3.Model.GameState.*;
 import static com.example.labb3.Model.PlayerTurn.*;
@@ -13,12 +13,12 @@ public class Model {
     private PlayerTurn turn = PLAYER1;
     private String player1Marker = "X";
     private Player2 player2;
-    private final ScoreDisplay scoreDisplay;
+    private final ScoreBoard scoreBoard;
     private GameState gameState = STARTED;
 
     public Model() {
         boardProperties = new StringProperty[BOARD_SIZE][BOARD_SIZE];
-        scoreDisplay = new ScoreDisplay(player1Marker);
+        scoreBoard = new ScoreBoard(player1Marker);
         player2 = new HumanPlayer2();
     }
 
@@ -36,10 +36,10 @@ public class Model {
             checkWinCondition();
         } else if (turn == PLAYER2) {
             turn = PLAYER1;
-            scoreDisplay.setPlayerTurn(player1Marker);
+            scoreBoard.setPlayerTurn(player1Marker);
         } else {
             turn = PLAYER2;
-            scoreDisplay.setPlayerTurn(player2.getMarker());
+            scoreBoard.setPlayerTurn(player2.getMarker());
         }
     }
 
@@ -69,7 +69,7 @@ public class Model {
 
             }
             gameState = FINISHED;
-            scoreDisplay.announceDraw();
+            scoreBoard.announceDraw();
     }
 
     private boolean checkLeftRight() {
@@ -97,8 +97,8 @@ public class Model {
 
     private void winTheGame() {
         gameState = FINISHED;
-        scoreDisplay.announceWinner(turn == PLAYER1 ? player1Marker : player2.getMarker());
-        scoreDisplay.addScore(turn);
+        scoreBoard.announceWinner(turn == PLAYER1 ? player1Marker : player2.getMarker());
+        scoreBoard.addScore(turn);
     }
 
     public void startGame() {
@@ -107,7 +107,7 @@ public class Model {
     }
 
     public void resetScore() {
-        scoreDisplay.newScoreDisplay(player1Marker);
+        scoreBoard.newScoreDisplay(player1Marker);
     }
 
     public void setPlayer2(Player2 player2) {
@@ -118,8 +118,8 @@ public class Model {
         return boardProperties;
     }
 
-    public ScoreDisplay getScoreDisplay() {
-        return scoreDisplay;
+    public ScoreBoard getScoreBoard() {
+        return scoreBoard;
     }
 
     public GameState getGameState() {

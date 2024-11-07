@@ -3,22 +3,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import com.sun.javafx.scene.control.ContextMenuContent.MenuBox?>
 <VBox prefHeight="500" prefWidth="700" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.labb3.Controller.HelloController">
     <MenuBar>
         <Menu text="Player 2">
-            <MenuItem fx:id="easyBot" onAction="#switchToEasyBot" text="Easy" />
-            <MenuItem onAction="#switchToHumanPlayer" text="Local" />
+            <MenuItem onAction="#switchToEasyBot" text="Easy"/>
+            <MenuItem onAction="#switchToHumanPlayer" text="Local"/>
         </Menu>
-
+        <Menu text="Score">
+            <MenuItem onAction="#pressOnRestartGame" text="Reset"/>
+        </Menu>
     </MenuBar>
     <VBox alignment="CENTER">
         <Label fx:id="announcer" />
         <Label fx:id="player1Score" />
-        <Label fx:id="playerOScore" />
+        <Label fx:id="player2Score" />
     </VBox>
     <HBox fx:id="borderPane" prefHeight="300" prefWidth="700" style="-fx-background-color: #14BDAC;" />
     <HBox alignment="CENTER">
-        <Button fx:id="restart_button" alignment="BOTTOM_CENTER" onMouseClicked="#pressOnRestartGame" text="Restart Game" />
         <Button fx:id="start_game" alignment="TOP_RIGHT" onMouseClicked="#pressOnNext" text="Next" />
 
     </HBox>
