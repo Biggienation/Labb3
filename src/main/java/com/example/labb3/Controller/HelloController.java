@@ -6,7 +6,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import com.example.labb3.Model.*;
 import javafx.scene.layout.GridPane;
@@ -28,8 +27,6 @@ public class HelloController {
     public Label player2Score;
     @FXML
     public Label announcer;
-    @FXML
-    public Button restart_button;
 
     private final Model model = new Model();
 
@@ -55,8 +52,8 @@ public class HelloController {
         announcer.textProperty().bind(model.getScoreBoard().getAnnouncer());
         announcer.setFont(Font.font(40));
 
-        player1Score.textProperty().bind(model.getScoreBoard().player1ScoreProperty());
-        player2Score.textProperty().bind(model.getScoreBoard().player2ScoreProperty());
+        player1Score.textProperty().bind(model.getScoreBoard().getPlayer1Score());
+        player2Score.textProperty().bind(model.getScoreBoard().getPlayer2Score());
         player1Score.setFont(Font.font(20));
         player2Score.setFont(Font.font(20));
     }

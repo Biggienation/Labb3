@@ -2,7 +2,7 @@ package com.example.labb3.Model;
 
 import com.example.labb3.Player2.HumanPlayer2;
 import com.example.labb3.Player2.Player2;
-import com.example.labb3.ScoreBoard.ScoreBoard;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import static com.example.labb3.Model.GameState.*;
 import static com.example.labb3.Model.PlayerTurn.*;
@@ -42,7 +42,6 @@ public class Model {
             scoreBoard.setPlayerTurn(player2.getMarker());
         }
     }
-
 
     public void checkWinCondition() {
         if (checkRow() ||checkColum() || checkRightLeft() || checkLeftRight())
@@ -107,7 +106,7 @@ public class Model {
     }
 
     public void resetScore() {
-        scoreBoard.newScoreDisplay(player1Marker);
+        scoreBoard.resetScore(player1Marker);
     }
 
     public void setPlayer2(Player2 player2) {
@@ -134,3 +133,5 @@ public class Model {
         return player1Marker;
     }
 }
+
+
